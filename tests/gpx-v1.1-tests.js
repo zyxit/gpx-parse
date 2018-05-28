@@ -19,10 +19,13 @@ var gpxParse = require("../"),
     '<trkpt lat="47.644548" lon="-122.326897">',
     '<ele>4.46</ele>',
     '<time>2009-10-17T18:37:26Z</time>',
+    '<desc>Description</desc>',
+    '<cmt>Comment</cmt>',
     '</trkpt>',
     '<trkpt lat="47.644548" lon="-122.326897">',
     '<ele>4.94</ele>',
     '<time>2009-10-17T18:37:31Z</time>',
+    '<desc />',
     '</trkpt>',
     '<trkpt lat="47.644548" lon="-122.326897">',
     '<ele>6.87</ele>',
@@ -54,8 +57,12 @@ module.exports = {
       test.equal(result.metadata.time.getTime(), 1255820323000);
       test.equal(result.tracks.length, 1);
       test.equal(result.tracks[0].name, 'Example GPX Document');
+      test.equal(result.tracks[0].segments[0][0].lat, 47.644548);
+      test.equal(result.tracks[0].segments[0][0].lon, -122.326897);
       test.equal(result.tracks[0].segments[0][0].time, new Date('2009-10-17T18:37:26Z').toString());
       test.equal(result.tracks[0].segments[0][0].elevation, 4.46);
+      test.equal(result.tracks[0].segments[0][0].cmt, "Comment");
+      test.equal(result.tracks[0].segments[0][0].description, "Description");      
       test.done();
     });
 

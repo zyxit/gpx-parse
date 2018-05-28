@@ -88,10 +88,17 @@ module.exports = {
     },
 
     "Test that the gpxTrack can be initialized": function(test) {
-        var gpxTrack = new GpxTrack([[new GpxWaypoint(1, 2), new GpxWaypoint(3, 4)],[new GpxWaypoint(5, 6), new GpxWaypoint(7, 8)]], "name");
+        var gpxTrack = new GpxTrack([[new GpxWaypoint(1, 2, 3, "2017-10-04T01:01:00Z",1,1,"name","cmt","descr"), new GpxWaypoint(3, 4)],[new GpxWaypoint(5, 6), new GpxWaypoint(7, 8)]], "name");
         test.equal(gpxTrack.name, "name");
         test.equal(gpxTrack.segments.length, 2);
         test.equal(gpxTrack.segment(0).length, 2);
+        test.equal(gpxTrack.segment(0)[0].lat, 1);
+        test.equal(gpxTrack.segment(0)[0].lon, 2);
+        test.equal(gpxTrack.segment(0)[0].elevation, 3);
+        test.equal(gpxTrack.segment(0)[0].time.toISOString(), "2017-10-04T01:01:00.000Z");
+        test.equal(gpxTrack.segment(0)[0].name, "name");
+        test.equal(gpxTrack.segment(0)[0].cmt, "cmt");
+        test.equal(gpxTrack.segment(0)[0].description, "descr");
         test.done();
     },
 
